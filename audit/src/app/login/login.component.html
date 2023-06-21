@@ -1,0 +1,168 @@
+<!-- <div class="container">
+    <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="loginForm.form.valid && submit(loginForm)">
+        <div class="mb-3">
+            <input type="hidden" name="id" [value]="loginservice.LoginData.id">
+            <label for="Username-name" class="col-form-label" class="float-left">Username</label>
+            <div *ngIf="Username.invalid && (Username.touched || Username.dirty)" class="alert alert-danger float-right"
+                role="alert">
+                Enter Username
+            </div>
+            <input type="text" class="form-control" id="recipient-name1" name="Username" #Username="ngModel"
+                [(ngModel)]="loginservice.LoginData.username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password-text" class="col-form-label">Password</label>
+            <div *ngIf="password.invalid && (password.touched || password.dirty)" class="alert alert-danger float-right"
+                role="alert">
+                Enter password
+            </div>
+            <input type="password" class="form-control" id="Pass1" name="password" #password="ngModel"
+                [(ngModel)]="loginservice.LoginData.password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="reset" class="btn btn-danger btnleft">Cancel</button>
+        
+    </form>
+</div><br> -->
+<br>
+<div class="container">
+    <button type="button" class="btn btn-outline-primary col-4" data-bs-toggle="modal"
+    data-bs-target="#exampleModal1">
+    Create
+</button>
+</div><br>
+<div>
+     <!-- Modal -->
+     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h1 class="modal-title fs-5" id="exampleModalLabel1">Create Login </h1>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal"
+                     aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+                <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="loginForm.form.valid && submit(loginForm)">
+                    <div class="mb-3">
+                        <input type="hidden" name="id1" [value]="loginservice.LoginData.id">
+                        <label for="Username-name" class="col-form-label" class="float-left">Username</label>
+                        <div *ngIf="Username.invalid && (Username.touched || Username.dirty)" class="alert alert-danger float-right"
+                            role="alert">
+                            Enter Username
+                        </div>
+                        <input type="text" class="form-control" id="recipient-name1" name="Username" #Username="ngModel"
+                            [(ngModel)]="loginservice.LoginData.username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password-text" class="col-form-label">Password</label>
+                        <div *ngIf="password.invalid && (password.touched || password.dirty)" class="alert alert-danger float-right"
+                            role="alert">
+                            Enter password
+                        </div>
+                        <input type="password" class="form-control" id="Pass1" name="password" #password="ngModel"
+                            [(ngModel)]="loginservice.LoginData.password" required>
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-danger btnleft">Cancel</button> -->
+                    
+                </form>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary"
+                     data-bs-dismiss="modal">Close</button>
+                 <button type="submit"  class="btn btn-primary close" (click)="submit(loginForm)" data-bs-dismiss="modal">Save changes</button>
+                 
+             </div>
+         </div>
+     </div>
+ </div>
+</div>
+
+<div class="container">
+    <Table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Action</th>
+                <!-- <th scope="col">Action</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let login of loginservice.LoginList">
+                <td scope="row">{{login.username}}</td>
+                <td scope="row">{{login.password}}</td>
+                <!-- <td scope="row">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#" (click)="populateLogin(login)">Edit</a></li>
+                            <li><a class="dropdown-item" href="#" (click)="deleteLogin(login.id)">Delete</a></li>
+                        </ul>
+                    </div>
+                </td> -->
+                <td>
+                    <div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-primary col-3" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" (click)="populateLogin(login)">
+                            Edit
+                        </button>
+                        <button type="button" class="btn btn-outline-danger col-3" id="btnDelete"
+                            (click)="deleteLogin(login.id)">
+                            Delete
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Page</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form autocomplete="off" #loginForm="ngForm"
+                                            (ngSubmit)="loginForm.form.valid && submit(loginForm)">
+                                            <div class="mb-3">
+                                                <input type="hidden" name="id" [value]="loginservice.LoginData.id">
+                                                <label for="Username-name" class="col-form-label">Username</label>
+                                                <input type="text" class="form-control" id="recipient-name"
+                                                    name="Username" #Username="ngModel"
+                                                    [(ngModel)]="loginservice.LoginData.username" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="password-text" class="col-form-label">Password</label>
+                                                <input type="password" class="form-control" id="Pass" name="password"
+                                                    #password="ngModel" [(ngModel)]="loginservice.LoginData.password"
+                                                    required>
+                                            </div>
+                                            <!-- <button type="submit" class="btn btn-primary"
+                                            >Save changes</button> -->
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit"  class="btn btn-primary close" (click)="submit(loginForm)" data-bs-dismiss="modal">Save changes</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
+
+                    </div>
+
+                </td>
+
+            </tr>
+        </tbody>
+    </Table>
+   
+</div>
